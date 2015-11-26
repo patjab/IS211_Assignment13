@@ -1,0 +1,66 @@
+<!-- Login page allowing for the taking in of information of username and password -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        table {
+            width: 55%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px;
+        }
+        th {
+            background-color: #142857;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            text-align: left;
+        }
+        td {
+            background-color: #009fff;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+        }
+        a:link {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        a:active {
+            color: #66ff66;
+            text-decoration: none;
+        }
+    </style>
+    <title>Log In</title>
+</head>
+<body>
+
+
+    <h2><b>Dashboard Login</b></h2>
+
+    <form action="/login" method="post">
+        <p>Username: <input type="text" name="username"></p>
+        <p>Password: <input type="password" name="password"></p>
+        <p><input type="submit" value="Login"></p>
+    </form>
+
+    <p><font color='red'>{{ status_message }}</font></p>
+
+ <p><a href="/quiz/1/results">Anonymous Mode</a></p>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!-- Takes in information on addition of quizzes -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        table {
+            width: 55%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px;
+        }
+        th {
+            background-color: #142857;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            text-align: left;
+        }
+        td {
+            background-color: #009fff;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+        }
+        a:link {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        a:active {
+            color: #66ff66;
+            text-decoration: none;
+        }
+    </style>
+    <title>Quiz Details</title>
+</head>
+<body>
+
+<h2><b>Quiz Results for {{ student_name }}</b></h2>
+
+{% if has_results %}
+    <table>
+        <tr><th>ID</th><th>Subject</th><th>Date of Quiz</th><th>Score</th><th>Delete</th></tr>
+        {% for grade in list_of_grades %}
+            <tr>
+                <td>{{ grade.quiz_id }}</td>
+                <td>{{ grade.subject }}</td>
+                <td>{{ grade.date }}</td>
+                <td>{{ grade.grade }}</td>
+                <td>
+                    <form action="/results/delete" method="post">
+                        <input type="hidden" name="student_id" value="{{ id }}">
+                        <input type="hidden" name="quiz_id" value="{{ grade.quiz_id }}">
+                        <input type="hidden" name="grade" value="{{ grade.grade }}">
+                        <input type="submit" value="Erase Record">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <i>No Results</i>
+{% endif %}
+<p><a href="/dashboard">Return to Dashboard</a></p>
+</body>
+</html>

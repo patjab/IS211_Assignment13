@@ -1,0 +1,116 @@
+<!-- Allows the dashboard to be displayed with class roaster and quiz list; Links to other controls are also listed -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        table {
+            width: 55%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px;
+        }
+        th {
+            background-color: #142857;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            text-align: left;
+        }
+        td {
+            background-color: #009fff;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+        }
+        a:link {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        a:active {
+            color: #66ff66;
+            text-decoration: none;
+        }
+    </style>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h2><b>Teacher Dashboard</b></h2>
+
+<font size="2">
+    <b>User: </b>{{ username }} |
+    <a href="/student/add">Add Student</a> |
+    <a href="/quiz/add">Add Quiz</a> |
+    <a href="/results/add">Add Quiz Result</a> |
+    <a href="/logout">Logout</a>
+</font>
+
+
+<table>
+    <tr><th colspan="5"><center>List of Quizzes</center></th></tr>
+    <tr>
+        <th width="10%"><center>ID</center></th>
+        <th width="35%">Subject</th>
+        <th width="20%"># of Questions</th>
+        <th width="20%">Date</th>
+        <th width="15%">Delete</th>
+    </tr>
+    {% for quiz in list_of_quizzes %}
+        <tr>
+            <td><center>{{ quiz.id }}</center></td>
+            <td>{{ quiz.subject }}</td>
+            <td>{{ quiz.num_of_questions }}</td>
+            <td>{{ quiz.date }}</td>
+            <td>
+                <form action="/quiz/delete" method="post">
+                    <input type="hidden" name="quiz_id" value="{{ quiz.id }}">
+                    <center><input type="submit" value="Delete"></center>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</table><br>
+
+<table>
+    <tr><th colspan="5"><center>Student Roaster</center></th></tr>
+    <tr>
+        <th width="10%"><center>ID</center></th>
+        <th width="27.5%">First Name</th>
+        <th width="27.5%">Last Name</th>
+        <th width="20%">Quizzes</th>
+        <th width="15%">Action</th>
+    </tr>
+    {% for student in student_roaster %}
+        <tr>
+            <td><center>{{ student.id }}</center></td>
+            <td>{{ student.first_name }}</td>
+            <td>{{ student.last_name }}</td>
+            <td><center><a href="/student/{{ student.id }}">Details</a></center></td>
+            <td>
+                <form action="/student/delete" method="post">
+                    <input type="hidden" name="student_id" value="{{ student.id }}">
+                    <center><input type="submit" value="Unenroll"></center>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

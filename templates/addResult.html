@@ -1,0 +1,91 @@
+<!-- Takes information for adding grades -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        table {
+            width: 55%;
+            border-spacing: 0px;
+            border-collapse: collapse;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 3px;
+        }
+        th {
+            background-color: #142857;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            text-align: left;
+        }
+        td {
+            background-color: #009fff;
+            color: #ffffff;
+            font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
+        }
+        a:link {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #66ff66;
+            text-decoration: none;
+        }
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        a:active {
+            color: #66ff66;
+            text-decoration: none;
+        }
+    </style>
+    <title>Add Grade</title>
+</head>
+<body>
+
+<h2><b>Grade Quiz</b></h2>
+
+<form action="/results/add" method="post">
+    <p>
+        Student:
+        <select name="student">
+            <option value="not_allowed">Select a student</option>
+            <option value="not_allowed">----------------</option>
+            {% for student in list_of_students %}
+                <!-- student[0] shows the fullname & student[1] contains the associated ID -->
+                <option value="{{ student[1] }}">{{ student[0] }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        Quiz:
+        <select name="quiz">
+            <option value="not_allowed">Select a quiz</option>
+            <option value="not_allowed">----------------</option>
+            {% for quiz in list_of_quizzes %}
+                <!-- quiz[0] shows the quiz subject & quiz[1] contains the associated ID -->
+                <option value="{{ quiz[1] }}">{{ quiz[0] }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>Grade: <input type="text" name="grade"></p>
+
+    <p><input type="submit" value="Grade"></p>
+
+    <p><a href="/dashboard">Return to Dashboard</a></p>
+</form>
+
+
+<p><font color="red">{{ error_message }}</font></p>
+
+</body>
+</html>
